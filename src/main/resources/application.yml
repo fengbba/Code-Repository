@@ -1,0 +1,7 @@
+server:
+  port: 8088
+
+access_token_dto:
+  client_id: ba2505dc6b235574e6fb
+  client_secret: 0c567a763fdecea8635ffacee17c641d58ad39b4
+  redirect_uri: http://127.0.0.1:8088/callback
