@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @program: community
  * @author: FvngGumHun
@@ -17,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 /*
-* Callback Controller
-* 需要对 accessToken 进行操作
-* */
+ * Callback Controller
+ * 需要对 accessToken 进行操作
+ * */
 public class AuthorizeController {
 
     @Autowired
@@ -33,9 +35,14 @@ public class AuthorizeController {
     @Value("${access_token_dto.redirect_uri}")
     private String redirect_uri;
 
+    /*
+     *  HttpServletRequest request,
+     *  Spring会将上下文中的request存入到该形参中
+     * */
     @GetMapping("/callback")
-    public String callBack(@RequestParam(name = "code")String code,
-                           @RequestParam(name = "state")String state){
+    public String callBack(@RequestParam(name = "code") String code,
+                           @RequestParam(name = "state") String state,
+                           HttpServletRequest request) {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(client_id);
         accessTokenDTO.setClient_secret(client_secret);
@@ -44,9 +51,19 @@ public class AuthorizeController {
         accessTokenDTO.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser userInfo = githubProvider.getUserInfo(accessToken);
-        System.out.println("userInfo : "+userInfo.getName());
-//        登录成功,返回index页面
-        return "index";
+        if (userInfo != null) {
+            // 登录成功, 编辑 Cookie & Session
+            //将 userInfo 命名为user 绑定到 Session
+            request.getSession().setAttribute("user", userInfo);
+
+            // 重定向到根目录, 具体根据页面跳转url 修改
+            return "redirect:/";
+        } else {
+            //登录失败
+            return "redirect:/";
+        }
+
+
     }
 
 }
