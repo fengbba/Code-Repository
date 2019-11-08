@@ -3,6 +3,7 @@ package com.example.community.community.controller;
 import com.example.community.community.dto.AccessTokenDTO;
 import com.example.community.community.dto.GithubUser;
 import com.example.community.community.provider.GithubProvider;
+import com.example.community.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -17,23 +18,29 @@ import javax.servlet.http.HttpServletRequest;
  * @create: 2019-11-07 04:51
  **/
 
-@Controller
+
 /*
  * Callback Controller
  * 需要对 accessToken 进行操作
  * */
+@Controller
 public class AuthorizeController {
 
     @Autowired
     private GithubProvider githubProvider;
 
+    @Autowired
+    private UserService userService;
+
     @Value("${access_token_dto.client_id}")
     private String client_id;
+
     @Value("${access_token_dto.client_secret}")
     private String client_secret;
 
     @Value("${access_token_dto.redirect_uri}")
     private String redirect_uri;
+
 
     /*
      *  HttpServletRequest request,
@@ -52,6 +59,10 @@ public class AuthorizeController {
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser userInfo = githubProvider.getUserInfo(accessToken);
         if (userInfo != null) {
+            System.out.println("Star if");
+            // 添加数据到数据库
+            userService.insert(userInfo);
+
             // 登录成功, 编辑 Cookie & Session
             //将 userInfo 命名为user 绑定到 Session
             request.getSession().setAttribute("user", userInfo);

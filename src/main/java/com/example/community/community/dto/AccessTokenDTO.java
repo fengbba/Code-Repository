@@ -1,10 +1,13 @@
 package com.example.community.community.dto;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @program: community
  * @author: FvngGumHun
  * @create: 2019-11-07 05:04
  **/
+@Component
 public class AccessTokenDTO {
     private String client_id;
     private String client_secret;

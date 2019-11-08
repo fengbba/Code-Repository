@@ -1,6 +1,18 @@
 server:
   port: 8088
 
+spring:
+  profiles:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/community?serverTimezone=GMT%2B8
+    username: swiftgalen
+    password: root
+  jpa:
+    hibernate:
+    ddl-auto: update
+  show-sql: true
+
 access_token_dto:
   client_id: ba2505dc6b235574e6fb
   client_secret: 0c567a763fdecea8635ffacee17c641d58ad39b4

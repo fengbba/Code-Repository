@@ -15,7 +15,6 @@ import java.io.IOException;
  **/
 
 @Component
-
 public class GithubProvider {
     public String getAccessToken(AccessTokenDTO accessTokenDTO) {
         //设置前台返回信息以 json 格式 返回

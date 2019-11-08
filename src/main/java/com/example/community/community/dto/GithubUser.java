@@ -1,10 +1,13 @@
 package com.example.community.community.dto;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @program: community
  * @author: FvngGumHun
  * @create: 2019-11-07 06:23
  **/
+@Component
 public class GithubUser {
     private String name;
     private long id;
