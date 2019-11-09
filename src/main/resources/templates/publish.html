@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/community_publish.css">
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -43,5 +44,48 @@
         </div>
     </div>
 </nav>
+<!--主体-->
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12">
+            <form action="">
+                <!--问题标题-->
+                <h3>问题标题（简单扼要）:</h3>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="问题标题......">
+                </div>
+                <!--问题正文-->
+                <h3>问题补充 (必填，请参照问题发起指南):</h3>
+                <textarea class="form-control" rows="15"></textarea>
+                <!--上传附件-->
+                <div class="form-group">
+                    <label for="InputFile">上传附件</label>
+                    <input type="file" id="InputFile">
+                    <p class="help-block">Example block-level help text here.</p>
+                </div>
+                <!--提交按钮-->
+                <button type="button" class="btn btn-success btn-publish">提交</button>
+            </form>
+        </div>
+        <!--侧边栏-->
+        <div class="col-lg-3 col-md-12">
+            <div>
+                <h3>问题发起指南</h3>
+                <p>
+                    <b>• 问题标题:请用精简的语言描述您发布的问题，不超过25字</b>
+                </p>
+                <p>
+                    <b>• 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料：</b>
+                </p>
+                <li>服务器运行环境信息；</li>
+                <li>软件版本；</li>
+                <li>问题发生的上下文信息；</li>
+                <li>可以完整复现问题的代码（如可直接运行于 Kibana Console 的复现流程）；</li>
+                <li>补充完整的异常和错误信息；</li>
+                <li>注意阅读格式友好，代码和异常信息请用代码标签格式化张贴；</li>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
