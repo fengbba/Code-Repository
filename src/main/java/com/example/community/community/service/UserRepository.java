@@ -4,6 +4,8 @@ import com.example.community.community.dao.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * @program: community
  * @author: FvngGumHun
@@ -11,5 +13,5 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public interface UserRepository extends JpaRepository<User,Integer> {
-
+    List<User> findByToken(String token);
 }

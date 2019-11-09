@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
  * @author: FvngGumHun
  * @create: 2019-11-07 05:04
  **/
+
+/*
+*
+* */
 @Component
 public class AccessTokenDTO {
     private String client_id;
