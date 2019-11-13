@@ -27,20 +27,19 @@ public class UserService {
         user.setToken(UUID.randomUUID().toString());
         user.setCreate_time(System.currentTimeMillis());
         user.setModified_time(user.getCreate_time());
+        user.setBio(githubUser.getBio());
+        user.setAvatar_url(githubUser.getAvatar_url());
         userRepository.save(user);
         return user;
     }
 
     //判断 token 是否存在
     public User findByToken(String token) {
-        System.out.println(" into find by token");
         List<User> users = userRepository.findByToken(token);
         if (users.size() > 0) {
-            System.out.println(" if not null");
             User user = users.get(0);
             return user;
         }
-        System.out.println(" if null");
         return null;
     }
 }
