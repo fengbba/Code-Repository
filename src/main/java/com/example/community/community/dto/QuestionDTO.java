@@ -1,5 +1,6 @@
 package com.example.community.community.dto;
 
+import com.example.community.community.dao.Question;
 import com.example.community.community.dao.User;
 import lombok.Data;
 
@@ -14,17 +15,7 @@ import java.util.Optional;
 @Data
 public class QuestionDTO {
 
-    private Integer id;
-    private String title;
-    private String description;
-    private Long create_time;
-    private Long modified_time;
-    private Integer creator_id;
-    private Integer comment_count;
-    private Integer like_count;
-    private Integer view_count;
-    private String tag;
+    private Question question;
     private User user;
-
 
 }

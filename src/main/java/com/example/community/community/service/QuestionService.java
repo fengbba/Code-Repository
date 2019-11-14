@@ -1,11 +1,13 @@
 package com.example.community.community.service;
 
-import com.alibaba.fastjson.JSON;
 import com.example.community.community.dao.Question;
 import com.example.community.community.dao.User;
+import com.example.community.community.dto.PaginationDTO;
 import com.example.community.community.dto.QuestionDTO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,17 +28,40 @@ public class QuestionService {
     UserRepository userRepository;
 
 
-    public List<QuestionDTO> getList() {
-        List<Question> questionList = questionRepository.findAll();
+    public PaginationDTO getList(Integer pageNumber, Integer pageSize) {
+        /*
+         * 创建时间降序排序
+         * */
+        //Sort sort = new Sort(Sort.Direction.DESC,"create_time");
+
+        /*
+         * 创建分页
+         * */
+        Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+
+        Page<Question> pageList = questionRepository.findAll(pageable);
+
+        List<Question> questionList = pageList.getContent();
+
         List<QuestionDTO> questionDTOList = new ArrayList<>();
+
         for (Question question : questionList) {
+
             Optional<User> user = userRepository.findById(question.getCreator_id());
             QuestionDTO questionDTO = new QuestionDTO();
-            BeanUtils.copyProperties(question, questionDTO);
+
+            questionDTO.setQuestion(question);
             questionDTO.setUser(user.get());
             questionDTOList.add(questionDTO);
         }
-        return questionDTOList;
 
+        PaginationDTO paginationDTO = new PaginationDTO();
+        paginationDTO.setQuestionDTOList(questionDTOList);
+        paginationDTO.setPaination(pageList.getTotalElements(), pageNumber, pageSize);
+
+
+        return paginationDTO;
     }
+
+
 }
