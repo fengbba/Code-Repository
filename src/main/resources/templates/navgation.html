@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-
+<head>
+    <title>我的社区</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community_publish.css">
+    <link rel="stylesheet" href="/css/index_img.css">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="../static/js/jquery-3.4.1.min.js"></script>
+</head>
 <body>
 
 <div th:fragment="navgation">
@@ -38,7 +48,8 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">我的问题</a></li>
+                            <li><a href="/profile/question">我的问题</a></li>
+                            <li><a href="/profile/replise">我的回复</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">退出登录</a></li>
                         </ul>

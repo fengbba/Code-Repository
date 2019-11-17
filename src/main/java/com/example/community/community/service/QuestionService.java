@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class QuestionService {
         /*
          * 创建分页
          * */
+        Sort sort = new Sort(Sort.Direction.DESC, "create_time");
+
         Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
 
         Page<Question> pageList = questionRepository.findAll(pageable);
