@@ -77,9 +77,9 @@ public class PublishController {
         question.setTitle(title);
         question.setDescription(description);
         question.setTag(tag);
-        question.setCreate_time(System.currentTimeMillis());
-        question.setModified_time(question.getCreate_time());
-        question.setCreator_id(user.getId());
+        question.setCreateTime(System.currentTimeMillis());
+        question.setModifiedTime(question.getCreateTime());
+        question.setCreatorId(user.getId());
         model.addAttribute("Question", question);
         publishService.addQuestion(question);
 

@@ -33,12 +33,12 @@ public class QuestionService {
         /*
          * 创建时间降序排序
          * */
-        //Sort sort = new Sort(Sort.Direction.DESC,"create_time");
+        //Sort sort = new Sort(Sort.Direction.DESC,"createTime");
 
         /*
          * 创建分页
          * */
-        Sort sort = new Sort(Sort.Direction.DESC, "create_time");
+        Sort sort = new Sort(Sort.Direction.ASC, "createTime");
 
         Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
 
@@ -50,7 +50,7 @@ public class QuestionService {
 
         for (Question question : questionList) {
 
-            Optional<User> user = userRepository.findById(question.getCreator_id());
+            Optional<User> user = userRepository.findById(question.getCreatorId());
             QuestionDTO questionDTO = new QuestionDTO();
 
             questionDTO.setQuestion(question);

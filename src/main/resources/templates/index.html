@@ -24,7 +24,7 @@
                 <div class="media" th:each="questionDTO:${paginationDTO.questionDTOList}">
                     <div class="media-left media-middle">
                         <a href="#">
-                            <img class="media-object media_img_index" th:src="${questionDTO.user.avatar_url}"
+                            <img class="media-object media_img_index" th:src="${questionDTO.user.getAvatarUrl}"
                                  alt="读取失败">
                         </a>
                     </div>
@@ -32,10 +32,10 @@
                         <h4 class="media-heading" th:text="${questionDTO.question.title}"></h4>
                         <span th:text="${questionDTO.question.description}"></span> <br>
                         <span class="text-desc">
-                            • <span th:text="${questionDTO.question.like_count}"></span> 人关注
-                            • <span th:text="${questionDTO.question.comment_count}"></span> 个回复
-                            • <span th:text="${questionDTO.question.view_count}"></span>  次浏览
-                            • 发布于<span th:text="${#dates.format(questionDTO.question.create_time,'yyyy-MM-dd')}"></span>
+                            • <span th:text="${questionDTO.question.likeCount}"></span> 人关注
+                            • <span th:text="${questionDTO.question.commentCount}"></span> 个回复
+                            • <span th:text="${questionDTO.question.viewCount}"></span>  次浏览
+                            • 发布于<span th:text="${#dates.format(questionDTO.question.getCreateTime,'yyyy-MM-dd')}"></span>
                         </span>
                     </div>
                 </div>

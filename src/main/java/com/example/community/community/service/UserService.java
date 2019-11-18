@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -20,16 +21,31 @@ public class UserService {
     private UserRepository userRepository;
 
     // 添加数据
-    public User insert(GithubUser githubUser) {
+    public User createOfUpdate(GithubUser githubUser) {
+        Optional<User> byAccountId = userRepository.findByAccountId(githubUser.getId());
         User user = new User();
-        user.setName(githubUser.getName());
-        user.setAccount_id(String.valueOf(githubUser.getId()));
-        user.setToken(UUID.randomUUID().toString());
-        user.setCreate_time(System.currentTimeMillis());
-        user.setModified_time(user.getCreate_time());
-        user.setBio(githubUser.getBio());
-        user.setAvatar_url(githubUser.getAvatar_url());
+        if (byAccountId.isPresent()) {          // Optional.empty
+            System.out.println("update");
+            //更新
+            user = byAccountId.get();
+            user.setToken(UUID.randomUUID().toString());
+            user.setName(githubUser.getName());
+            user.setBio(githubUser.getBio());
+            user.setAvatarUrl(githubUser.getAvatar_url());
+            user.setModifiedTime(System.currentTimeMillis());
+        } else {
+            System.out.println("insert");
+            //插入
+            user.setToken(UUID.randomUUID().toString());
+            user.setName(githubUser.getName());
+            user.setAccountId(githubUser.getId());
+            user.setBio(githubUser.getBio());
+            user.setAvatarUrl(githubUser.getAvatar_url());
+            user.setCreateTime(System.currentTimeMillis());
+            user.setModifiedTime(user.getCreateTime());
+        }
         userRepository.save(user);
+
         return user;
     }
 

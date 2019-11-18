@@ -26,13 +26,9 @@ public class IndexController {
     private QuestionService questionService;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request,
-                        Model model,
-                        @RequestParam(name = "pageNumber", defaultValue = "1") Integer pageNumber,
-                        @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize) {
-
-
-
+    public String index(@RequestParam(name = "pageNumber", defaultValue = "1") Integer pageNumber,
+                        @RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize,
+                        Model model) {
         /*
          * 分页查询
          * */

@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.Future;
 
 /**
  * @program: community
@@ -13,6 +15,11 @@ import java.util.List;
  **/
 @Component
 public interface UserRepository extends JpaRepository<User,Integer> {
+
+    Optional<User> findById(Integer id);
+
+
     List<User> findByToken(String token);
 
+    Optional<User> findByAccountId(long account_id);
 }

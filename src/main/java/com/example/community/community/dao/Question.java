@@ -17,9 +17,9 @@ public class Question {
     private Integer id;
     private String title;
     private String description;
-    private Long create_time;
-    private Long modified_time;
-    private Integer creator_id;
+    private Long createTime;
+    private Long modifiedTime;
+    private Integer creatorId;
     private String tag;
     /*
     * @Column(name = "XXX" , insertable = false)
@@ -27,11 +27,11 @@ public class Question {
     * false 时, 主要用来搭配默认值&不需要修改的值
     * */
     @Column(name = "comment_count",insertable = false)
-    private Integer comment_count;
+    private Integer commentCount;
     @Column(name = "like_count",insertable = false)
-    private Integer like_count;
+    private Integer likeCount;
     @Column(name = "view_count",insertable = false)
-    private Integer view_count;
+    private Integer viewCount;
 
 
 

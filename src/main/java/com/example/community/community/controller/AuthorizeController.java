@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -81,7 +82,7 @@ public class AuthorizeController {
             /*
              * 将 userInfo 存入数据库
              * */
-            User user = userService.insert(userInfo);
+            User user = userService.createOfUpdate(userInfo);
             /*
              * 将 user 的 token 存入 Cookie 以 token 来命名
              * */
@@ -96,6 +97,19 @@ public class AuthorizeController {
         }
 
 
+    }
+
+    //    退出登录
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                           HttpServletResponse response) {
+//        清除Session
+        request.getSession().removeAttribute("user");
+//        清楚Cookie
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 
 }

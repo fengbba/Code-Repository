@@ -21,13 +21,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String account_id;
+    private long accountId;
     private String name;
     private String bio;
     private String token;
-    private Long create_time;
-    private Long modified_time;
-    private String avatar_url;
+    private Long createTime;
+    private Long modifiedTime;
+    private String avatarUrl;
 
 
 }
